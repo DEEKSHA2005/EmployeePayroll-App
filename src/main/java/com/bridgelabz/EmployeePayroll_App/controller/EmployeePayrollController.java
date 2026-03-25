@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import com.bridgelabz.EmployeePayroll_App.dto.EmployeeDTO;
 import com.bridgelabz.EmployeePayroll_App.service.IEmployeePayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
 @RestController
 @RequestMapping("/employeepayrollservice")
@@ -37,6 +38,9 @@ public class EmployeePayrollController {
     @Autowired
     private IEmployeePayrollService employeePayrollService;
 
-
+    @GetMapping("/all")
+    public List<EmployeeDTO> getAllEmployees() {
+        return employeePayrollService.getAllEmployees();
+    }
 
 }
