@@ -1,6 +1,7 @@
 package com.bridgelabz.EmployeePayroll_App.controller;
 
 import org.springframework.web.bind.annotation.*;
+import com.bridgelabz.EmployeePayroll_App.dto.EmployeeDTO;
 
 @RestController
 @RequestMapping("/employeepayrollservice")
@@ -17,8 +18,9 @@ public class EmployeePayrollController {
     }
 
     @PostMapping("/create")
-    public String createEmployee(@RequestBody String data) {
-        return "Created Employee: " + data;
+    public String createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        return "Created Employee: " + employeeDTO.getName() +
+                " Salary: " + employeeDTO.getSalary();
     }
 
     @PutMapping("/update")
@@ -30,4 +32,7 @@ public class EmployeePayrollController {
     public String deleteEmployee(@PathVariable int id) {
         return "Deleted Employee with ID: " + id;
     }
+
+
+
 }
