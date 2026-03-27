@@ -26,6 +26,7 @@ public class EmployeePayrollController {
     public String createEmployee(@RequestBody EmployeeDTO employeeDTO) {
 
         log.info("Received request to create employee: {}", employeeDTO);
+        log.debug("Debugging employee creation");
 
         return employeePayrollService.createEmployee(employeeDTO);
     }
