@@ -5,7 +5,9 @@ import com.bridgelabz.EmployeePayroll_App.dto.EmployeeDTO;
 import com.bridgelabz.EmployeePayroll_App.service.IEmployeePayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
@@ -22,6 +24,9 @@ public class EmployeePayrollController {
 
     @PostMapping("/create")
     public String createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+
+        log.info("Received request to create employee: {}", employeeDTO);
+
         return employeePayrollService.createEmployee(employeeDTO);
     }
 
@@ -40,6 +45,9 @@ public class EmployeePayrollController {
 
     @GetMapping("/all")
     public List<EmployeeDTO> getAllEmployees() {
+
+        log.info("Fetching all employees");
+
         return employeePayrollService.getAllEmployees();
     }
 
