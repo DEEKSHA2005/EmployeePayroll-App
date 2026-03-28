@@ -7,5 +7,7 @@ public interface IEmployeePayrollService {
 
     String createEmployee(EmployeeDTO employeeDTO);
 
+    String updateEmployee(int id, EmployeeDTO dto);
+
     List<EmployeeDTO> getAllEmployees();
 }

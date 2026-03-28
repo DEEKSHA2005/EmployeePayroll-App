@@ -6,6 +6,7 @@ import com.bridgelabz.EmployeePayroll_App.service.IEmployeePayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import jakarta.validation.Valid;
 
 @Slf4j
 @RestController
@@ -23,7 +24,7 @@ public class EmployeePayrollController {
     }
 
     @PostMapping("/create")
-    public String createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+    public String createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
 
         log.info("Received request to create employee: {}", employeeDTO);
         log.debug("Debugging employee creation");
@@ -31,9 +32,11 @@ public class EmployeePayrollController {
         return employeePayrollService.createEmployee(employeeDTO);
     }
 
-    @PutMapping("/update")
-    public String updateEmployee(@RequestBody String data) {
-        return "Updated Employee: " + data;
+    @PutMapping("/update/{id}")
+    public String updateEmployee(@PathVariable int id,
+                                 @Valid @RequestBody EmployeeDTO employeeDTO) {
+
+        return employeePayrollService.updateEmployee(id, employeeDTO);
     }
 
     @DeleteMapping("/delete/{id}")

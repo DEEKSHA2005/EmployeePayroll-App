@@ -34,4 +34,18 @@ public class EmployeePayrollService implements IEmployeePayrollService {
                 .map(emp -> new EmployeeDTO(emp.getName(), emp.getSalary()))
                 .toList();
     }
+
+    @Override
+    public String updateEmployee(int id, EmployeeDTO dto) {
+
+        Employee emp = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+
+        emp.setName(dto.getName());
+        emp.setSalary(dto.getSalary());
+
+        repository.save(emp);
+
+        return "Employee updated";
+    }
 }
