@@ -1,16 +1,29 @@
-# Employee Payroll App
+# Employee Payroll Application (Spring Boot)
 
 ## Overview
 
-This project is a **Spring Boot REST API application** developed as part of backend learning.
-It provides basic REST endpoints to simulate operations in an Employee Payroll system.
+This project is a **Spring Boot REST API application** for managing employee payroll data.
+It supports **CRUD operations**, **validation**, and **global exception handling** with MySQL database integration.
 
-The application demonstrates how to:
+---
 
-* Set up a Spring Boot project
-* Create REST APIs using Spring Web
-* Handle HTTP methods (GET, POST, PUT, DELETE)
-* Follow GitFlow for version control
+## Features
+
+✔ Create Employee
+
+✔ Get All Employees
+
+✔ Update Employee
+
+✔ Delete Employee
+
+✔ MySQL Database Integration
+
+✔ Input Validation using Jakarta Validation
+
+✔ Global Exception Handling
+
+✔ Clean JSON Error Responses
 
 ---
 
@@ -19,39 +32,110 @@ The application demonstrates how to:
 * Java 17
 * Spring Boot
 * Spring Web
+* Spring Data JPA
+* MySQL
+* Lombok
 * Maven
-* Git & GitFlow
 
 ---
 
 ## Project Structure
 
 ```
-EmployeePayrollApp
+src/main/java/com/bridgelabz/EmployeePayroll_App
 │
-├── src/main/java/com/bridgelabz/EmployeePayroll_App
-│   ├── EmployeePayrollAppApplication.java
-│   └── controller
-│       └── EmployeePayrollController.java
-│
-├── src/main/resources
-│   └── application.properties
-│
-└── pom.xml
+├── controller
+├── service
+├── repository
+├── model
+├── dto
+├── exception
+└── EmployeePayrollAppApplication
 ```
 
 ---
 
-## Features Implemented
+## API Endpoints
 
-UC1 – Setup
+### 🔹 Create Employee
 
-Created Spring Boot project
+**POST** `/employeepayrollservice/create`
 
-Added required dependencies
-
-UC2 – REST APIs
-
-Implemented basic CRUD operations using REST
+```
+{
+  "name": "Deeksha",
+  "salary": 100000
+}
+```
 
 ---
+
+### 🔹 Get All Employees
+
+**GET** `/employeepayrollservice/all`
+
+---
+
+### 🔹 Update Employee
+
+**PUT** `/employeepayrollservice/update/{id}`
+
+```
+{
+  "name": "Sathya",
+  "salary": 70000
+}
+```
+
+---
+
+### 🔹 Delete Employee
+
+**DELETE** `/employeepayrollservice/delete/{id}`
+
+---
+
+## Validation Rules
+
+* Name must not be empty
+* Name must contain only letters
+* Minimum 3 characters
+
+---
+
+## Error Handling
+
+Custom error response format:
+
+```
+{
+  "status": 400,
+  "message": "Name cannot be empty",
+  "timeStamp": 17123456789
+}
+```
+
+---
+
+## How to Run
+
+1. Clone the repository
+2. Open in IntelliJ
+3. Configure MySQL
+4. Run:
+
+```
+EmployeePayrollAppApplication.java
+```
+
+---
+
+## Testing
+
+Use **Postman**:
+
+* Base URL: `http://localhost:8080`
+* Test all endpoints using JSON requests
+
+---
+
