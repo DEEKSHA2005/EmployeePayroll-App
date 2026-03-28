@@ -1,38 +1,31 @@
 package com.bridgelabz.EmployeePayroll_App.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.*;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-@ControllerAdvice
+import java.util.HashMap;
+import java.util.Map;
+
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // 🔥 VALIDATION ERROR HANDLER
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<EmployeePayrollException> handleValidationException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, Object>> handleValidationException(MethodArgumentNotValidException ex) {
+
+        Map<String, Object> response = new HashMap<>();
 
         String errorMessage = ex.getBindingResult()
-                .getFieldError()
-                .getDefaultMessage();
+                .getFieldErrors()
+                .stream()
+                .findFirst()
+                .map(error -> error.getDefaultMessage())
+                .orElse("Validation error");
 
-        EmployeePayrollException error = new EmployeePayrollException(
-                HttpStatus.BAD_REQUEST.value(),
-                errorMessage
-        );
+        response.put("status", 400);
+        response.put("message", errorMessage);
+        response.put("timeStamp", System.currentTimeMillis());
 
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
-
-    // 🔥 GENERAL EXCEPTION
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<EmployeePayrollException> handleAllException(Exception ex) {
-
-        EmployeePayrollException error = new EmployeePayrollException(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                ex.getMessage()
-        );
-
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

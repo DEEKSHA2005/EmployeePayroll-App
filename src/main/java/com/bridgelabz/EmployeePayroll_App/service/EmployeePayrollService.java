@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.bridgelabz.EmployeePayroll_App.service.IEmployeePayrollService;
 import com.bridgelabz.EmployeePayroll_App.repository.EmployeeRepository;
 import com.bridgelabz.EmployeePayroll_App.model.Employee;
+import com.bridgelabz.EmployeePayroll_App.exception.EmployeeNotFoundException;
 
 @Service
 public class EmployeePayrollService implements IEmployeePayrollService {
@@ -39,7 +40,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     public String updateEmployee(int id, EmployeeDTO dto) {
 
         Employee emp = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
 
         emp.setName(dto.getName());
         emp.setSalary(dto.getSalary());
