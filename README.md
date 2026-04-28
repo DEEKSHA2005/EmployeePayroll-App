@@ -55,6 +55,46 @@ src/main/java/com/bridgelabz/EmployeePayroll_App
 
 ---
 
+##  Use Cases
+
+### 🔹 UC1 – Application Setup
+Initialize Spring Boot project with required dependencies and basic structure.
+
+### 🔹 UC2 – REST API Controller
+Create REST endpoints for handling employee payroll operations.
+
+### 🔹 UC3 – DTO Model
+Introduce DTO (Data Transfer Object) for transferring employee data between layers.
+
+### 🔹 UC4 – Service Layer
+Implement business logic using service layer to separate concerns.
+
+### 🔹 UC5 – In-Memory Storage
+Store employee data temporarily using List before database integration.
+
+### 🔹 UC6 – Lombok Integration
+Reduce boilerplate code using Lombok annotations like `@Data`.
+
+### 🔹 UC7 – Logging Implementation
+Add logging using SLF4J to track application flow and debug information.
+
+### 🔹 UC8 – Logging Levels
+Configure logging levels (INFO, DEBUG, ERROR) using properties file.
+
+### 🔹 UC9 – Database Integration
+Connect application with MySQL using Spring Data JPA and persist employee data.
+
+### 🔹 UC10 – Input Validation
+Validate employee input using `@NotBlank` and `@Pattern` annotations.
+
+### 🔹 UC11 – Global Exception Handling
+Handle exceptions globally using `@RestControllerAdvice`.
+
+### 🔹 UC12 – Custom Exception Handling
+Create custom exception for employee not found and return structured error responses.
+
+---
+
 ## API Endpoints
 
 ### 🔹 Create Employee
